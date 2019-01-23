@@ -7,7 +7,7 @@ description: "Make hay while the sun shines."
 keyword: "DCL, DCL Blog, 戴春雷的博客, daichunlei, 戴春雷"
 url: "http://davinly.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
-github_repo: "https://github.com/Davinly/davinly.github.io.git" # you code repository
+github_repo: "https://github.com/davinly/davinly.github.io.git" # you code repository
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
@@ -66,7 +66,7 @@ gitalk:
   clientSecret: 665bdfb8b29f6422a960dd3a695d0677ffa90265    #生成的clientSecret
   repo: davinly.github.io    #仓库名称
   owner: davinly    #github用户名
-  admin: daichunlei
+  admin: davinly
   distractionFreeMode: true #是否启用类似FB的阴影遮罩
 
 
