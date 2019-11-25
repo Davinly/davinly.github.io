@@ -29,6 +29,8 @@ NO.16
 地点：嘉兴  
 成绩：4:22:39（[证书](http://daichunlei.com/img/marathon_certificate/2019%E5%98%89%E5%85%B4.jpg)）
 
+![](http://daichunlei.com/img/marathon_picture/16.jpg)
+
 ----------
 
 NO.15  
