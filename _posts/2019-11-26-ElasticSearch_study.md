@@ -253,3 +253,40 @@ index.routing.allocation.total_shards_per_node:4
 - cluster.routing.allocation.disable_replica_allocation:这个属性默认是false。当它设 为true时，将会禁止将副本分片分配到节点。
 前面所有的属性既可以在elasticsearch.yml文件里设置，也可以通过更新API来设置。然而在实践中，通常只使用更新API来配置一些属性，如- cluster.routing.allocation.disable_new_allocation、cluster.routing.allocation.disable_allocation、cluster.routing.allocation. disable_replica_allocation。
 
+**应用我们的知识**
+ 
+性能测试开源工具：
+
+- ApacheJMeter
+- ActionGenerator
+- ElasticSearch paramedic的插件
+- ElasticSearch BigDesk的插件 
+ 
+避免单个节点上运行多个ElasticSearch实例  
+将node.max_local_storage_nodes属性值设为1，是为了避免单个节点上运行多个ElasticSearch实例。
+
+发现
+在发现模块的配置中，我们仅仅设置了一个属性，即设置discovery.zen.minimum_master_nodes的属性值为3。它能指定组成集群所需的且可以成为主节点的最小节点数，取值至少是集群节点数的一半加1.
+
+记录慢查询
+协同ElasticSearch工作时，有件事情非常重要:记录那些执行时间大于等于某个阈值的查询。请注意，这个日志记录的不是查询的全部执行时间，而是查询在每个分片上执行的时间，这意味着日志记录的只是执行时间的一部分。
+
+在例子里，我们想使用INFO级日志记录执行超过500毫秒的查询和执行超过1秒的实时读取操作。对于调试级日志，这里分别设置为100毫秒和200毫秒。下面是这部分内容的配置片段:
+
+index.search.slowlog.threshold.query.info:500ms
+index.search.slowlog.threshold.query.debug:100ms
+index.search.slowlog.threshold.fetch.info:1s
+index.search.slowlog.threshold.fetch.debug:200ms
+记录垃圾回收器的工作情况
+最后，由于我们在没有监控的情况下就开始了，因而想看看垃圾回收器表现如何。例如，想要搞清楚是否以及何时垃圾回收器消耗了太多的时间。为了实现这个目的，我们在elasticsearch.yml文件里加人下面几行内容:
+
+monitor.jvm.gc.ParNew.info:700ms
+monitor‘jvm.gc.ParNew.debug:400ms
+monitor.jvm.gc.ConcurrentMarkSweep.info:5s
+monitor.jvm.gc.ConcurrentMarkSweep.debug:2s
+通过使用INFO级日志，当并发标记清除(concurrent mark sweep)执行等于或超过5秒时，以及新生代收集(younger generation collection)执行超过700毫秒时，ElasticSearch会记录垃圾回收器工作超时的信息。同时也加上了DEBUG级日志，用来应对我们想要调试或者修复问题的情况。
+
+内存设置
+通常的建议是不要使Java虚拟机堆的大小超过可用内存总量的50%。
+在前面所展示的配置中，我们设置了ElasticSearch记录垃圾回收器的信息，然而为了长期监控，你可能还需要使用类似SPM ( http://sematext.com/spm/index.html)或Munin(http://munin-monitoring.org/)的监控工具。
+
