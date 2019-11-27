@@ -9,7 +9,7 @@ catalog: true
 tags:
     - BigData
 ---
-# ElasticSearch简介 #
+# 1、ElasticSearch简介 #
 
 ## Apache Lucene ##
 ElasticSearch的创始人使用Apache Lucene创建索引的同时也用Lucene进行搜索。为什么用Apache Lucene而不上开发自己的全文检索库？Lucene的特点：成熟、高性能、可扩展、轻量级以及强大的功能。Lucene的内核可以创建为独立的Java库文件并且不依赖第三方代码，用户可以使用它提供的各种所见即所得的全文检索功能进行索引和搜索操作。Lucene还有很多扩展功能，如多语言处理、拼写检查、高亮显示等。
@@ -57,7 +57,7 @@ ElasticSearch提供四种方式创建索引。
 
 查询并不是一个简单的、单步骤的操作。一般来说，查询分为两个阶段：分散阶段（scatter phase）和合并阶段（gather phase）。分散阶段将query分发到包含相关文档的多个分片中去执行查询，合并阶段则从众多分片中收集返回结果，然后对他们进行合并、排序、后续处理，然后返回给客户端。
 
-# 查询DSL进阶 #
+# 2、查询DSL进阶 #
 ## Apache Lucene 默认的评分公式 ##
 文档得分依赖多个因子，除了权重和查询本身的结构，还包括匹配的词项数目，词项所在字段，以及用于查询规范化的匹配类型等。  
 因子：文档权重（document boost）、字段权重（field boost）、协调因子（coord）、逆文档频率（inverse document frequency）、长度范数（length norm）、词频（term frequency）、查询范数（query norm）。  
@@ -132,7 +132,7 @@ ElasticSearch允许用户通过设置_cache和_cache_key属性来开启或关闭
 在切面类型的相同层级上使用切面过滤器（facet filter），能通过使用过滤器减少计算切面时的文档数，就像在查询时使用过滤器那样。  
 不需要强制运行第二次查询，这是因为可以使用全局切面作用域（global faceting scope）来达成目的，并具体通过将切面类型的global属性配置为true来实现。  
 
-# 底层索引控制 #
+# 3、底层索引控制 #
 ## 改变Apache lucene的评分公式 ##
 可用的相似度模型：Okapi BM25模型、随机偏离（Divergence from randomness）模型、基于信息的（information based）模型。  
 ## 相似度模型配置 ##
@@ -162,8 +162,94 @@ ElasticSearch允许用户通过设置_cache和_cache_key属性来开启或关闭
 index.merge.scheduler.type:concurrent（使用并发合并调度器）  
 index.merge.scheduler.type:serial（使用顺序合并调度器）  
 
-# 分布式索引架构 #  
+# 4、分布式索引架构 #  
 ## 选择合适的分片和副本数 ##
 ElasticSearch设计者选择的默认配置（5个分片和1个副本）使数据量增长和多分片搜索结果合并之间达到平衡。  
 公式：节点最大数=分片数*(副本数+1)  
+## 路由 ##
+路由是优化集群的一个很强大的机制。它能让我们根据应用程序的逻辑来部署文档，从而可用用更少的资源构建更快速的查询。  
+路由确保了在索引时拥有相同路由值的文档会索引到相同的分片上，但一个给定的分片上可以有很多拥有不同路由值的文档。路由可以限制查询时使用的节点数，但是不能替代过滤功能。这意味着无论一个查询有没有使用路由都应该使用相同的过滤器。  
+别名能让我们像使用普通索引那样使用路由。 "alias":"别名"  
+允许在一次查询中使用多个路由值。多路由值意味着在一个或多个分片上查询。  
+## 调整默认的分片分配行为 ##
+两种分片分配器（ShardAllocator）：even_shard、balanced（默认）。  
+**even_shard**：这个分配器并排工作在索引级别。这意味着只要分片及其副本在不同的节点上，分配器就认为工作正常，而不关心来自同一索引的不同分片存放到哪里。  
+**even_shard、balanced**：
+可调整的参数如下所示:
+cluster.routing.allocation.balance.shard:默认值为0.45.
+cluster.routing.allocation.balance.index:默认值为0.5.
+cluster.routing.allocation.balance.primary默认值为0.05.
+cluster.routing.allocation.balance.threshold:默认值为1.0.
+第一个参数告诉ElasticSearch每个节点都分配数量相近的分片对我们有多么重要。
+第二个参数类似，但不是基于所有的分片数，而是基于同一个索引的分片数。
+第三个参数告诉ElasticSearch将主分片平均分配到节点有多么重要。
+最后，如果所有因子与其权重的乘积的总和大于已定义的阂值，那么这类索引上的分 片就需要重新分配了。而如果出于某些原因，你希望忽略一个或多个因子，只要把它们的权重设为0就可以了。
+
+**裁决者(decider)：**  
+ElasticSearch允许同时使用多个裁决者，而且它们会在决策过程中投票。这里有一个规则共识，例如，如果某裁决者投票反对重新分配一个分片的操作，那么该分片就不能移动。裁决者只有固定的十来个，如果想添加新的决策者，只能通过修改ElasticSearch源码。
+
+**SameShardAllocationDecider**  
+顾名思义，该裁决者禁止将相同数据的拷贝(分片和其副本)放到相同的节点上。注意属性 cluster.routing.allocation.same_shard.host属性。它控制了ElasticSearch 是否需要考虑分片放到物理机器上的位置。它默认为false，因为许多节点可能运行在同一台运行着多个虚拟机的服务器上。而当设置成true时，这个裁决者会禁止将分片和其副本 放置在同一台物理机器上。
+
+**ShardsLimitAllocationDecider**  
+ShardsLimitAllocationDecider确保一个给定索引在某节点上的分片不会超过给定 数量。这个数量是由index.routing.allocation.total_ shards_per_node属性控制的，可以在elasticsearch.yml文件中设置，或者通过索引更新API在线更新。属性的默认值是-1，表明没有限制。
+
+**FiIterAllocationDecider**  
+只在我们增加了控制分片分配的参数时才会用到。
+
+**RepIicaAfterPrimaryActiveAllocationDecider**  
+这个裁决者使得ElasticSearch仅在主分片都分配好之后才开始分配副本。
+
+**ClusterRebalanceAllocationDecider**  
+ClusterRebalanceAllocationDecider允许根据集群的当前状态来改变集群进行重新平衡 的时机。该裁决者可以通过cluster.routing.allocation.allow_rebalance属性来控制，它支持以下这些值:
+indices_all_active :这个默认值表明重新平衡仅在集群中所有已存在的分片都分配好后才能进行。
+indices_primaries_active:这个设置表明重新平衡只在主分片分配好以后才进行。
+always:这个设置表明重新平衡总是可以进行，甚至在主分片和副本还没有分配好 时也可以。
+
+注意这些设置在运行时不能更改。
+
+**ConcurrentRebalanceAllocationDecider**  
+ConcurrentRebalanceAllocationDecider用于调节重新部署操作，并基于cluster.routing. allocation.cluster_concurrent_rebalance属性。在该属性的帮助下，我们可以设置给定集群上可以并发执行的重新部署操作的数量，默认是2个，意味着在集群上只有不超过2个的分片可以同时移动。把这个值设为-1将没有限制。
+
+**DisabIeAlIocationDecider**  
+DisableAllocationDecider是一个可以调整自身行为来满足应用需求的裁决者。有以下配置
+cluster.routing.allocation.disable_allocation:这个设置允许我们禁止所有的分配。
+cluster.routing.allocaiotn.disable_new_allocation:这个设置允许我们禁止新主分片的分配。
+cluster.routing.allocation.disable_replica_allocation:这个设置允许我们禁止副本的分配。
+所有这些设置的默认值都是false。它们在你想要完全控制分配时非常有用。例如，当 你想要快速地重新分配和重新启动一些节点时，便可以禁止重新分配。另外请记住尽管你可以在elasticsearch.yml文件里设置前面提到的那些属性，但这里使用更新API会更有意义。
+
+利用该配置可快速重启节点，而不进行分片分配。
+
+**AwarenessAllocationDecider**  
+AwarenessAllocationDecider是用来处理意识部署功能的。无论什么时候使用了cluster. routing.allocation.awareness.attributes设置，它都会起作用。
+
+**ThrottlingAllocationDecider**  
+ThrottlingAllocationDecider与前面讨论过的ConcurrentRebalanceAllocationDecider类 似，该裁决者允许我们限制分配过程产生的负载。我们可以使用下面的属性控制恢复过程:
+cluster.routing.allocation.node_initial_primaries_recoveries:参数值默认为4。它描述了单节点所允许的最初始的主分片恢复操作的数量。
+cluster.routing.allocation.node_concurrent_recoveries:参数值默认为2。它定义了单节点上并发恢复操作的数量。
+
+**RebalanceOnlyWhenActiveAllocationDecider  **  
+限制重新平衡过程仅在分片组（主分片和它的副本们）内的所有分片都是活动的（active）情况下进行。
+
+**DiskThresholdDecider**  
+DiskThresholdDecider在ElasticSearch的0.90.4版本里引人，它允许我们基于服务器上的空余磁盘容量来部署分片。默认它是禁用的，因而必须设置cluster.routing.allocation.disk.threshold_enabled属性为true来启用它。该裁决者允许我们配置一些阈值，以决定何时将分片放到某个节点上以及ElasticSearch应该何时将分片迁移到另一个节点上。
+cluster.routing.allocation.disk.watermark.low：属性允许我们在分片分配可用时指定一个 阀值或绝对值。例如，默认值是0.7，这告诉Elasticsearch新分片可以分配到一个磁盘使用率低于70%的节点上。
+cluster.routing.allocation.disk.watermark.high：属性允许我们在某分片分配器试图将分片 迁移到另一个节点时指定一个阀值或绝对值:‘默认值是0.85，意味着ElasticSearch会在磁盘空间使用率上升到85%时重新分配分片。
+cluster.routing.allocation.disk.watermark.low和cluster.routing.allocation.disk.watermark. high这两个属性都可以设置成百分数(如0.7或0.85 )，或者绝对值(如1 OOOmb )。另外，本节提到的所有属性都可以在 elasticsearch.yml里静态设置，或使用ElasticSearch API动态更新。
+
+## 调整分片分配 ##
+在elasticsearch.yml文件里做如下设置:  
+index.routing.allocation.total_shards_per_node:4  
+这样，单个节点上最多会为同一个索引分配4个分片。  
+
+**更多的分片分配属性：**
+
+- cluster.routing.allocation.allow_rebalance:这个属性允许我们基于集群中所有分片的 状态来控制执行再平衡(rebanlance)的时机。可选的值包括:always、indices_primaries_active 、indices_all_active （默认）。
+- cluster.routing.allocation.cluster concurrent_rebanlance:这个属性控制我们的集群内有多少分片可以并发参与再平衡处理，默认值为2。
+- cluster.routing.allocation.node_initial_primaries_recoveries:这个属性指定了每个节 点可以并发恢复的主分片数量。基于主分片恢复通常比较快，即使把属性值设置得较大，也不会给节点本身带来过多的压力。这个属性的默认值为4.
+- cluster.routing.allocation.node_concurrent_recoveries:这个属性指定了每个节点允 许的最大并发恢复分片数，默认值是2。
+- cluster.routing.allocation.disable_new_allocaiton:默认值是false。该属性用来控制是否禁止为新创建的索引分配新分片(包括主分片和副本分片)。
+- cluster.routing.allocation.disable_allocation:默认值是false。该属性用来控制是否禁 止针对已创建的主分片和副本分片的分配。请注意，将一个副本分片提升为主分片(如果主分片不存在)的行为不算分配。
+- cluster.routing.allocation.disable_replica_allocation:这个属性默认是false。当它设 为true时，将会禁止将副本分片分配到节点。
+前面所有的属性既可以在elasticsearch.yml文件里设置，也可以通过更新API来设置。然而在实践中，通常只使用更新API来配置一些属性，如- cluster.routing.allocation.disable_new_allocation、cluster.routing.allocation.disable_allocation、cluster.routing.allocation. disable_replica_allocation。
 
