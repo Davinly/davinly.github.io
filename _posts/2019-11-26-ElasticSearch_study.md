@@ -8,6 +8,7 @@ header-img: img/code/01.jpg
 catalog: true
 tags:
     - BigData
+    - ElasticSearch
 ---
 # 1、ElasticSearch简介 #
 
