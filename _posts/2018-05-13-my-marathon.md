@@ -20,7 +20,9 @@ NO.18
 NO.17  
 时间：2019年12月1日  
 地点：上饶  
-成绩：
+成绩：4:17:39（[证书](http://daichunlei.com/img/marathon_certificate/2019%E4%B8%8A%E9%A5%B6.jpg)）
+
+![](http://daichunlei.com/img/marathon_picture/17.jpg)
 
 ----------
 
