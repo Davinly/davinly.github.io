@@ -20,7 +20,7 @@ NO.19
 NO.18  
 时间：2019年12月15日  
 地点：淮南  
-成绩：4:00:36
+成绩：4:00:36（[证书](http://daichunlei.com/img/marathon_certificate/2019%E6%B7%AE%E5%8D%97.jpg)）
 
 
 ![](http://daichunlei.com/img/marathon_picture/18.jpg)
