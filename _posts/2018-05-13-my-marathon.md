@@ -13,7 +13,7 @@ tags:
 NO.19  
 时间：2020年1月5日  
 地点：厦门  
-成绩：
+成绩：4:53:56（[证书](http://daichunlei.com/img/marathon_certificate/2020%E5%8E%A6%E9%97%A8.jpg)）
 
 ----------
 
