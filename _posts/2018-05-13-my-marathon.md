@@ -15,6 +15,8 @@ NO.19
 地点：厦门  
 成绩：4:53:56（[证书](http://daichunlei.com/img/marathon_certificate/2020%E5%8E%A6%E9%97%A8.jpg)）
 
+![](http://daichunlei.com/img/marathon_picture/19.jpg)
+
 ----------
 
 NO.18  
