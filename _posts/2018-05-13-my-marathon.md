@@ -4,7 +4,6 @@ subtitle:   向前跑,继续跑……
 date:       2018-05-13
 author:     DCL
 header-img: img/bg-myself-05.jpg
-catalog: true
 tags:
     - run
     - marathon  
