@@ -9,6 +9,15 @@ tags:
     - marathon  
 ---
 
+NO.20  
+时间：2020年10月25日  
+地点：盐城  
+成绩：5:03:49（[证书](https://daichunlei.com/img/marathon_certificate/2020%E7%9B%90%E5%9F%8E.jpg)）
+
+![](http://daichunlei.com/img/marathon_picture/20.jpg)
+
+----------
+
 NO.19  
 时间：2020年1月5日  
 地点：厦门  
