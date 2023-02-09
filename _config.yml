@@ -63,7 +63,8 @@ kramdown:
 gitalk:
   enable: true    #是否开启Gitalk评论
   clientID: 8bb2b9109ea38d8855eb                            #生成的clientID
-  clientSecret: 665bdfb8b29f6422a960dd3a695d0677ffa90265    #生成的clientSecret
+  #clientSecret: 665bdfb8b29f6422a960dd3a695d0677ffa90265 
+  clientSecret: 376fad01f85ed2ebc52471035b3852627bbdfd32  #生成的clientSecret
   repo: davinly.github.io    #仓库名称
   owner: davinly    #github用户名
   admin: davinly
