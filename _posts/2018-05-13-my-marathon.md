@@ -10,7 +10,10 @@ tags:
 ---
 NO.23  
 时间：2023年3月26日   
-地点：苏州
+地点：苏州   
+成绩：04:49:33（[证书](https://daichunlei.com/img/marathon_certificate/2023%E8%8B%8F%E5%B7%9E.jpg)）
+
+![](http://daichunlei.com/img/marathon_picture/23.jpg)
 
 ----------
 
