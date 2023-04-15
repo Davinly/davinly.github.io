@@ -8,6 +8,15 @@ tags:
     - run
     - marathon  
 ---
+NO.24  
+时间：2023年4月9日    
+地点：鹤壁    
+成绩：04:57:48（[证书](https://daichunlei.com/img/marathon_certificate/2023%E9%B9%A4%E5%A3%81.jpg)） 
+
+![](http://daichunlei.com/img/marathon_picture/24.jpg)
+
+----------
+
 NO.23  
 时间：2023年3月26日   
 地点：苏州   
