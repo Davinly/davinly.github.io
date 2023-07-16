@@ -8,6 +8,15 @@ tags:
     - run
     - marathon  
 ---
+NO.25   
+时间：2023年7月9日    
+地点：呼和浩特    
+成绩：04:57:48（[证书](https://daichunlei.com/img/marathon_certificate/2023%E5%91%BC%E5%92%8C%E6%B5%A9%E7%89%B9.jpg)） 
+
+![](http://daichunlei.com/img/marathon_picture/25.jpg)
+
+----------
+
 NO.24  
 时间：2023年4月9日    
 地点：鹤壁    
