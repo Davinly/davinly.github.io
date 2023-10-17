@@ -8,6 +8,15 @@ tags:
     - run
     - marathon  
 ---
+NO.26   
+时间：2023年10月15日    
+地点：烟台     
+成绩：04:29:36（[证书](https://daichunlei.com/img/marathon_certificate/2023%E7%83%9F%E5%8F%B0.jpg)） 
+
+![](http://daichunlei.com/img/marathon_picture/26.jpg)
+
+----------
+
 NO.25   
 时间：2023年7月9日    
 地点：呼和浩特    
