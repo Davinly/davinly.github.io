@@ -8,6 +8,15 @@ tags:
     - run
     - marathon  
 ---
+NO.29     
+时间：2023年12月17日    
+地点：杭州     
+成绩：04:27:00（[证书](https://www.hzim.org/p/hzim/player/bindingscore.jsf)） 
+
+![](http://daichunlei.com/img/marathon_picture/29.jpg)
+
+---------- 
+
 NO.28    
 时间：2023年11月26日    
 地点：上海     
