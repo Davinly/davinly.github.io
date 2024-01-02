@@ -11,7 +11,7 @@ tags:
 NO.29     
 时间：2023年12月17日    
 地点：杭州     
-成绩：04:27:00（[证书](https://www.hzim.org/p/hzim/player/bindingscore.jsf)） 
+成绩：04:27:00（[证书](https://daichunlei.com/img/marathon_certificate/2023hangzhou.jpg)） 
 
 ![](http://daichunlei.com/img/marathon_picture/29.jpg)
 
