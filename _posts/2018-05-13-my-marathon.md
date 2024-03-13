@@ -1,13 +1,22 @@
 ---
 title:      记录我的全程马拉松
 subtitle:   向前跑,继续跑……
-date:       2023-12-17
+date:       2024-3-10
 author:     DCL
 header-img: img/bg-myself-05.jpg
 tags:
     - run
     - marathon  
 ---
+NO.30     
+时间：2024年3月10日    
+地点：南京浦口      
+成绩：04:24:26（[证书](https://daichunlei.com/img/marathon_certificate/2024nanjinpukou.jpg)） 
+
+![](http://daichunlei.com/img/marathon_picture/30.jpg)
+
+---------- 
+
 NO.29     
 时间：2023年12月17日    
 地点：杭州     
