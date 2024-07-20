@@ -3,7 +3,7 @@ title:      记录我的全程马拉松
 subtitle:   向前跑,继续跑……
 date:       2018-05-13
 author:     DCL
-header-img: img/sonjp01.jpg
+header-img: img/bg-family-01.jpg
 tags:
     - run
     - marathon  
