@@ -8,6 +8,15 @@ tags:
     - run
     - marathon  
 ---
+NO.31     
+时间：2024年9月22日    
+地点：衡水      
+成绩：04:43:46（[证书](https://daichunlei.com/img/marathon_certificate/2024hengshuihu.png)） 
+
+![](http://daichunlei.com/img/marathon_picture/31.jpg)
+
+---------- 
+
 NO.30     
 时间：2024年3月10日    
 地点：南京浦口      
