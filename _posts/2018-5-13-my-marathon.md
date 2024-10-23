@@ -8,6 +8,15 @@ tags:
     - run
     - marathon  
 ---
+NO.32     
+时间：2024年10月20日    
+地点：天津      
+成绩：04:06:29（[证书](https://daichunlei.com/img/marathon_certificate/2024tianjin.jpg)） 
+
+![](http://daichunlei.com/img/marathon_picture/32.jpg)
+
+---------- 
+
 NO.31     
 时间：2024年9月22日    
 地点：衡水      
