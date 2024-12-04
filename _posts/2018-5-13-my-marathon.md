@@ -8,6 +8,15 @@ tags:
     - run
     - marathon  
 ---
+NO.33     
+时间：2024年12月01日    
+地点：深圳      
+成绩：04:51:59（[证书](https://daichunlei.com/img/marathon_certificate/2024shenzhen.jpg)） 
+
+![](http://daichunlei.com/img/marathon_picture/33.jpg)
+
+---------- 
+
 NO.32     
 时间：2024年10月20日    
 地点：天津      
