@@ -1,13 +1,22 @@
 ---
 title:      记录我的全程马拉松
 subtitle:   向前跑,继续跑……
-date:       2018-05-13
+date:       2025-11-30
 author:     DCL
 header-img: img/bg-myson.jpg
 tags:
     - run
     - marathon  
 ---
+NO.34      
+时间：2025年11月30日    
+地点：上海       
+成绩：04:22:26（[证书](https://daichunlei.com/img/marathon_certificate/2025shanghai.jpg)） 
+
+![](http://daichunlei.com/img/marathon_picture/34.jpg)
+
+---------- 
+
 NO.33     
 时间：2024年12月01日    
 地点：深圳      
